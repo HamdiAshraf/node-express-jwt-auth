@@ -1,6 +1,6 @@
 const User=require('../models/User')
 const jwt=require('jsonwebtoken')
-
+require('dotenv').config()
 const handleErrors=(error)=>{
     console.log(error.message,error.code)
     const errors={email:'',password:''};
@@ -31,7 +31,7 @@ const handleErrors=(error)=>{
 const maxAge=3*24*60*60 ;//in token expects times in seconds but in cookies in mil seconds
 const createToken=(id)=>{
 
-    return jwt.sign({id},'my_secret_key',{
+    return jwt.sign({id},process.env.secret_key,{
         expiresIn: maxAge
         
     })
